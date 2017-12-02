@@ -49,7 +49,8 @@ fun newGrade(name: String, weight: Float, components: Array<Float>, totalCompone
             totalMark = totalMark)
 }
 
-fun newGrade(name: String, weight: Float, components: Array<Float>, totalComponents: Int, drop_lowest: Int): Grade {
+fun newGrade(name: String, weight: Float, components: Array<Float>,
+             totalComponents: Int, drop_lowest: Int): Grade {
     val size = components.size
     val validMarks = components.sortedArray().sliceArray(drop_lowest until size)
     val sum = validMarks.sum()
