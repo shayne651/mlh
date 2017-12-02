@@ -6,14 +6,45 @@ import kotlin.collections.ArrayList
 /**
  * Created by andrei on 12/2/17.
  */
-data class Grade (var name: String, var mark: Float, var weight: Float,
-                  internal var dropped: Boolean = false): Serializable
+data class Grade (var name: String, var weight: Float,
+                  internal var totalComponents: Int, internal var drop_lowest: Int = 0,
+                  private var _components: Array<Float>, var mark: Float = 0f,
+                  var totalMark: Float = 0f): Serializable {
+    var components: Array<Float>
+        get() = _components
+        set(components) {
+            val sum = components.sum()
+            if  (totalComponents < components.size)
+                totalComponents = components.size
+            mark = sum/components.size
+            totalMark = sum/totalComponents
+            _components = components
+        }
+}
 
 data class Class (var name: String,
                   val assignments: ArrayList<Grade> = ArrayList<Grade>()): Serializable
 
 data class Semsester  (var name: String,
                        val classes: ArrayList<Class> = ArrayList<Class>()): Serializable
+
+fun newGrade(name: String, weight: Float, components: Array<Float>) : Grade {
+    val sum = components.sum()
+    val mark = sum/components.size
+    return Grade(name, weight, components.size, _components = components, mark = mark)
+}
+
+fun newGrade(name: String, weight: Float, components: Array<Float>, totalComponents: Int) : Grade {
+    val sum = components.sum()
+    val mark = sum/components.size
+    val totalMark = sum/totalComponents
+    var count = totalComponents
+    if (totalComponents < components.size)
+        count = components.size
+    return Grade(name, weight, count, _components = components, mark = mark,
+            totalMark = totalMark)
+}
+
 
 fun newClass(name: String) : Class {
     return Class(name)
@@ -38,26 +69,15 @@ fun addGrade(c:Class, g:Grade): Class  {
     return c;
 }
 
-fun addGrade(c:Class, name: String, mark: Float, weight: Float): Class  {
-    c.assignments.add(Grade(name,mark,weight))
+fun addGrade(c:Class, name: String, weight: Float, components: Array<Float>): Class  {
+    c.assignments.add(newGrade(name,weight, components))
     return c;
-}
-
-fun drop(g: Grade): Grade {
-    g.dropped = true
-    return g
-}
-
-fun undrop(g: Grade): Grade {
-    g.dropped = false
-    return g
 }
 
 fun Boolean.toInt() = if (this) 1 else 0
 
 fun avg(c: Class): Float {
-    return c.assignments.map { it.mark * it.weight * it.dropped.toInt() }.sum() /
-            c.assignments.map { (!it.dropped).toInt() }.sum()
+    return c.assignments.map { it.mark * it.weight }.sum() / c.assignments.count()
 }
 
 

@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gradeL = (ListView)findViewById(R.id.gradeList);
-        Grade gr = new Grade("dis",17f,20f);
-        Grade gr2 = new Grade("ex",17f,20f);
+        java.lang.Float[] grades = {0.2f};
+        Grade gr = DataKt.newGrade("dis",.2f,grades);
+        Grade gr2 = DataKt.newGrade("ex",.2f,grades);
         ArrayList<Grade> gra= new ArrayList<Grade>();
         gra.add(gr);
         gra.add(gr2);
