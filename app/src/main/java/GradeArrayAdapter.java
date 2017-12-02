@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GradeArrayAdapter extends ArrayAdapter<Grades> {
 
-    public GradeArrayAdapter(Context context, List<Grades>){
+    public GradeArrayAdapter(Context context, List<Grades> data){
         super(context, R.layout.activity_list_item);
     }
 
