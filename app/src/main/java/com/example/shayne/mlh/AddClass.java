@@ -1,5 +1,6 @@
 package com.example.shayne.mlh;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class AddClass extends MainActivity {
             public void onClick(View view) {
                 Intent ret = new Intent();
                 ret.putExtra("name",txtCourse.getText().toString());
+                setResult(Activity.RESULT_OK,ret);
                 finish();
             }
         });

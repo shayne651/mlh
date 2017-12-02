@@ -45,15 +45,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void newCourse(View view){
         Intent intent = new Intent(MainActivity.this, AddClass.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 
     @Override
     public void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        switch (requestCode){
-           // if(requestCode == Activity)
-        }
+            if(resultCode == Activity.RESULT_OK){
+                String val = data.getStringExtra("name");
+                classes.add(DataKt.newClass(val));
+                updateClassList();
+            }
+    }
+
+    public void add(String name){
+
     }
 
 
