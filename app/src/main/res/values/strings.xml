@@ -4,4 +4,6 @@
     <string name="code">Course Code:</string>
     <string name="sem">Semester:</string>
     <string name="year">Year:</string>
+    <string name="addCourse">Add Course</string>
+    <string name="title_activity_add_class">Add Class</string>
 </resources>
