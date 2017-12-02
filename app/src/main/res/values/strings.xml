@@ -2,4 +2,6 @@
     <string name="app_name">mlh</string>
     <string name="name">Name:</string>
     <string name="code">Course Code:</string>
+    <string name="sem">Semester:</string>
+    <string name="year">Year:</string>
 </resources>
