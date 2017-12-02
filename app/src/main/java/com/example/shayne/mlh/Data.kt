@@ -1,17 +1,19 @@
 package com.example.shayne.mlh
 
 import java.io.Serializable
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
  * Created by andrei on 12/2/17.
  */
-data class Grade (var name: String, var mark: Float, var weight: Float): Serializable
+data class Grade (var name: String, var mark: Float, var weight: Float,
+                  internal var dropped: Boolean = false): Serializable
 
-data class Class (var name: String, val assignments: ArrayList<Grade> = ArrayList<Grade>()): Serializable
+data class Class (var name: String,
+                  val assignments: ArrayList<Grade> = ArrayList<Grade>()): Serializable
 
-data class Semsester  (var name: String, val classes: ArrayList<Class> = ArrayList<Class>()): Serializable
+data class Semsester  (var name: String,
+                       val classes: ArrayList<Class> = ArrayList<Class>()): Serializable
 
 fun newClass(name: String) : Class {
     return Class(name)
@@ -41,8 +43,21 @@ fun addGrade(c:Class, name: String, mark: Float, weight: Float): Class  {
     return c;
 }
 
+fun drop(g: Grade): Grade {
+    g.dropped = true
+    return g
+}
+
+fun undrop(g: Grade): Grade {
+    g.dropped = false
+    return g
+}
+
+fun Boolean.toInt() = if (this) 1 else 0
+
 fun avg(c: Class): Float {
-    return c.assignments.map { it.mark * it.weight }.sum() / c.assignments.size
+    return c.assignments.map { it.mark * it.weight * it.dropped.toInt() }.sum() /
+            c.assignments.map { (!it.dropped).toInt() }.sum()
 }
 
 
