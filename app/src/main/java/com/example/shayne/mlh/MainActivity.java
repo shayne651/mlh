@@ -12,7 +12,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity
+                        implements AdapterView.OnItemClickListener{
 
     private GradeArrayAdapter contact;
     private ListView gradeL;
@@ -59,9 +60,9 @@ public class MainActivity extends AppCompatActivity{
             }
     }
 
-    //@Override
-    public void OnItemClick(AdapterView aView, View source, int pos, long id){
-
+    @Override
+    public void onItemClick(AdapterView aView, View source, int position, long id){
+        //Intent in = new Intent(R.layout.)
     }
 
 
