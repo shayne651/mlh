@@ -1,5 +1,6 @@
 package com.example.shayne.mlh;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +21,9 @@ public class AddClass extends MainActivity {
         final Button button = (Button) findViewById(R.id.buttonAdd);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Course course = new Course();
-                course.courseName = txtCourse.getText().toString();
+                Intent ret = new Intent();
+                ret.putExtra("name",txtCourse.getText().toString());
+                finish();
             }
         });
     }

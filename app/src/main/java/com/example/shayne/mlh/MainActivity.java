@@ -1,5 +1,6 @@
 package com.example.shayne.mlh;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void newCourse(View view){
         Intent intent = new Intent(MainActivity.this, AddClass.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode){
+           // if(requestCode == Activity)
+        }
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.shayne.mlh;
 
 import android.content.Context;
-import android.print.PrintDocumentAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by shayne on 2017-12-02.
  */
 
-public class GradeArrayAdapter extends ArrayAdapter<Grades> {
+public class GradeArrayAdapter extends ArrayAdapter<Grade> {
 
     private List<Grade> grades;
     private Context context;
 
     public GradeArrayAdapter(Context context, List<Grade> data){
-        super(context, R.layout.activity_list_item);
+        super(context, R.layout.activity_list_item, data);
         this.context = context;
         grades = data;
     }
