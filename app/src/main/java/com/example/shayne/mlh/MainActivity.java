@@ -1,7 +1,9 @@
 package com.example.shayne.mlh;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import java.lang.reflect.Array;
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private void updateClassList(){
         ClassArrayAdapter ad = new ClassArrayAdapter(this,classes);
         gradeL.setAdapter(ad);
+    }
+
+    public void newCourse(View view){
+        Intent intent = new Intent(MainActivity.this, AddClass.class);
     }
 
 
