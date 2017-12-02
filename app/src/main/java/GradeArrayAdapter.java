@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by shayne on 2017-12-02.
  */
-
+/*
 public class GradeArrayAdapter extends ArrayAdapter<Grades> {
 
     public GradeArrayAdapter(Context context, List<Grades> data){
@@ -17,3 +17,4 @@ public class GradeArrayAdapter extends ArrayAdapter<Grades> {
     }
 
 }
+*/
