@@ -1,16 +1,17 @@
 package com.example.shayne.mlh
 
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
 /**
  * Created by andrei on 12/2/17.
  */
-data class Grade (var name: String, var mark: Float, var weight: Float)
+data class Grade (var name: String, var mark: Float, var weight: Float): Serializable
 
-data class Class (var name: String, val assignments: ArrayList<Grade> = ArrayList<Grade>())
+data class Class (var name: String, val assignments: ArrayList<Grade> = ArrayList<Grade>()): Serializable
 
-data class Semsester  (var name: String, val classes: ArrayList<Class> = ArrayList<Class>())
+data class Semsester  (var name: String, val classes: ArrayList<Class> = ArrayList<Class>()): Serializable
 
 fun newClass(name: String) : Class {
     return Class(name)
