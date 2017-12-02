@@ -59,6 +59,7 @@ fun addClass(s:Semsester, c:Class): Semsester {
     return s
 }
 
+
 fun addClass(s:Semsester, name:String): Semsester {
     s.classes.add(Class(name))
     return s
@@ -72,6 +73,14 @@ fun addGrade(c:Class, g:Grade): Class  {
 fun addGrade(c:Class, name: String, weight: Float, components: Array<Float>): Class  {
     c.assignments.add(newGrade(name,weight, components))
     return c;
+}
+
+fun gradeNeeded(c: Class) : Float {
+    return gradeNeeded(c, 0.5f)
+}
+
+fun gradeNeeded(c: Class, target: Float) : Float {
+    return (target - avg(c))/(1-c.assignments.map { it.weight }.sum())
 }
 
 fun Boolean.toInt() = if (this) 1 else 0
