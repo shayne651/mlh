@@ -25,8 +25,18 @@ fun addClass(s:Semsester, c:Class): Semsester {
     return s
 }
 
+fun addClass(s:Semsester, name:String): Semsester {
+    s.classes.add(Class(name))
+    return s
+}
+
 fun addGrade(c:Class, g:Grade): Class  {
     c.assignments.add(g)
+    return c;
+}
+
+fun addGrade(c:Class, name: String, mark: Float, weight: Float): Class  {
+    c.assignments.add(Grade(name,mark,weight))
     return c;
 }
 
