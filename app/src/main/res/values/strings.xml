@@ -2,4 +2,7 @@
     <string name="app_name">mlh</string>
     <string name="name">Name:</string>
     <string name="code">Course Code:</string>
+    <string name="title_activity_add_class">AddClass</string>
+
+
 </resources>

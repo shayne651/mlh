@@ -16,7 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListItem"></activity>
+        <activity android:name=".ListItem" />
+        <activity
+            android:name=".AddClass"
+            android:label="@string/title_activity_add_class"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
