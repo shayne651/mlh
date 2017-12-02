@@ -19,7 +19,7 @@ public class AddClass extends MainActivity {
     public void ButtonOnClick(View view){
         final Button button = (Button) findViewById(R.id.buttonAdd);
         button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Course course = new Course();
                 course.courseName = txtCourse.getText().toString();
             }
