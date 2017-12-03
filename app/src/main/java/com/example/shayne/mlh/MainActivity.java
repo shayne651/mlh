@@ -1,6 +1,7 @@
 package com.example.shayne.mlh;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
                         implements AdapterView.OnItemClickListener{
@@ -18,24 +21,24 @@ public class MainActivity extends AppCompatActivity
     private GradeArrayAdapter contact;
     private ListView gradeL;
     private ArrayList<Class> classes;
+    private String saveLocation = "classes.dat";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gradeL = (ListView)findViewById(R.id.gradeList);
-        java.lang.Float[] grades = {0.2f};
-        Grade gr = DataKt.newGrade("dis",.2f,grades);
-        Grade gr2 = DataKt.newGrade("ex",.2f,grades);
-        ArrayList<Grade> gra= new ArrayList<Grade>();
-        gra.add(gr);
-        gra.add(gr2);
-        Class cas = new Class("dis",gra);
-        Class cas2 = new Class("s",gra);
         classes = new ArrayList<Class>();
-        classes.add(cas);
-        classes.add(cas2);
+        gradeL = (ListView)findViewById(R.id.gradeList);
+        try {
+            FileInputStream in = openFileInput(saveLocation);
+            ObjectInputStream oin = new ObjectInputStream(in);
+            while (oin != null) {
+                classes.add((Class)oin.readObject());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         updateClassList();
     }
@@ -63,6 +66,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemClick(AdapterView aView, View source, int position, long id){
         //Intent in = new Intent(R.layout.)
+    }
+
+    @Override
+    public void onPause() {
+        System.out.println("paused");
+        try {
+            OutputStream outputStream = openFileOutput(saveLocation, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+            for (Class c :classes) {
+                oos.writeObject(c);
+            };
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onPause();
     }
 
 
