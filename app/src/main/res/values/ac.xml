@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="header">Add Course</string>
-    <string name="courseName">Course Name:</string>
-    <string name="buttonAdd">Add</string>
+
 </resources>

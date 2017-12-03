@@ -12,7 +12,7 @@
         android:layout_width="66dp"
         android:layout_height="18dp"
         android:layout_marginBottom="51dp"
-        android:text="Category:"
+        android:text="@string/category_label"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2" />
@@ -35,7 +35,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="Weight(decimal):"
+        android:text="@string/textview2"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget"
         app:layout_constraintBottom_toBottomOf="@+id/weight_val"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -59,7 +59,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="124dp"
         android:onClick="cancel"
-        android:text="Cancel"
+        android:text="@string/cancel_button"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/weight_val" />
 
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:onClick="save"
-        android:text="Save"
+        android:text="@string/save_button"
         app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button"
         app:layout_constraintEnd_toEndOf="@+id/weight_val" />
 
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="Multiple Grades?"
+        android:text="@string/checkBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/cancel_button"
         app:layout_constraintTop_toTopOf="parent"

@@ -6,4 +6,14 @@
     <string name="year">Year:</string>
     <string name="addCourse">Add Course</string>
     <string name="title_activity_add_class">Add Class</string>
+    <string name="header">Add Course</string>
+    <string name="courseName">Course Name:</string>
+    <string name="buttonAdd">Add</string>
+    <string name="AddCategory">Add Category</string>
+    <string name="grade_label">Grade(%)</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="category_label">Category:</string>
+    <string name="textview2">Weight(decimal):</string>
+    <string name="checkBox">Multiple Grades?</string>
 </resources>

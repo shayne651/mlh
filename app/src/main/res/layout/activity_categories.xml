@@ -13,9 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="7dp"
         android:onClick="openNew"
-        android:text="Add Category"
+        android:text="@string/AddCategory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/Category_list"
         app:layout_constraintTop_toBottomOf="@+id/Category_list" />
