@@ -24,6 +24,7 @@
         <activity android:name=".grade_item"></activity>
         <activity android:name=".Categories"></activity>
         <activity android:name=".new_category"></activity>
+        <activity android:name=".grade_edit"></activity>
 
     </application>
 

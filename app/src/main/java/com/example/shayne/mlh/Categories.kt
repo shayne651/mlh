@@ -2,9 +2,11 @@ package com.example.shayne.mlh
 
 import android.app.Activity
 import android.content.Intent
+import android.os.AsyncTask.execute
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ListView
 
 /*4*
@@ -14,6 +16,7 @@ import android.widget.ListView
 class Categories : AppCompatActivity() {
 
     val newCatReqCode = 1
+    val editGradeReqCode = 2
     lateinit var curClass: Class;
     lateinit var gradeArrayAdapter: GradeArrayAdapter
     lateinit var listView: ListView
@@ -26,6 +29,14 @@ class Categories : AppCompatActivity() {
         listView = findViewById(R.id.Category_list) as ListView
         gradeArrayAdapter = GradeArrayAdapter(applicationContext,curClass.assignments)
         listView.adapter = gradeArrayAdapter;
+
+        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
+            override fun onItemClick(l: AdapterView<*>?, v: View?, p: Int, id: Long) {
+                val int = Intent(baseContext, grade_edit::class.java)
+                int.putExtra("grade", l!!.getItemAtPosition(p) as Grade)
+                startActivityForResult(int, editGradeReqCode)
+            }
+        }
     }
 
     fun updateGradeList() {
@@ -39,12 +50,23 @@ class Categories : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == newCatReqCode){
-            if (resultCode == Activity.RESULT_OK) {
-                val name = data!!.getStringExtra("category_name")
-                val weight = data!!.getFloatExtra("weight", 0f)
-                addGrade(curClass,name,weight, emptyArray<Float>())
-                gradeArrayAdapter.notifyDataSetChanged()
+        when (resultCode){
+            newCatReqCode -> run {
+                if (resultCode == Activity.RESULT_OK) {
+                    val name = data!!.getStringExtra("category_name")
+                    val weight = data!!.getFloatExtra("weight", 0f)
+                    addGrade(curClass, name, weight, emptyArray<Float>())
+                    gradeArrayAdapter.notifyDataSetChanged()
+                }
+            }
+            editGradeReqCode -> run {
+                if (resultCode == Activity.RESULT_OK) {
+                    val grade = data!!.getSerializableExtra("grade") as Grade
+                    val pos = data!!.getIntExtra("pos", -1)
+                    if (pos >= 0) {
+                        curClass.assignments[pos] = grade
+                    }
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

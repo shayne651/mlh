@@ -87,11 +87,9 @@ public class MainActivity extends AppCompatActivity {
             case editClassReqCode:
                 if (resultCode == Activity.RESULT_OK) {
                     int position = data.getIntExtra("position", -1);
-                    System.out.println("class: " + position);
                     Class c = (Class)data.getSerializableExtra("class");
-                    if (position > 0) {
+                    if (position >= 0) {
                         classes.remove(position);
-                        System.out.println(c);
                         classes.add(position, c);
                         updateClassList();
                     }
