@@ -2,6 +2,7 @@ package com.example.shayne.mlh;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ public class new_category extends AppCompatActivity {
     EditText weightEditor;
     EditText nameEditor;
     Button save;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +81,12 @@ public class new_category extends AppCompatActivity {
     }
 
     private boolean isValidWeight(TextView textView) {
-        textView.setTextColor(Color.BLACK);
+        if (textView.length() < 1) return false;
         try {
             weight = java.lang.Integer.parseInt(textView.getText().toString());
-        } catch (android.net.ParseException e) {
-            textView.setTextColor(Color.RED);
+        } catch (java.lang.NumberFormatException e) {
             return false;
-        } catch (Exception e) {
+        }  catch (Exception e) {
             e.printStackTrace();
         }
         return true;
