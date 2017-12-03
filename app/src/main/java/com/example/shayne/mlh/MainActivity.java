@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Class> classes;
     private String saveLocation = "classes.dat";
     private final int newClassReqCode = 1;
+    private final int editClassReqCode = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> l, View v, final int position, long id) {
                 Intent in = new Intent(getBaseContext(), Categories.class);
-                startActivity(in);
+                in.putExtra("class", (Class)l.getItemAtPosition(position));
+                in.putExtra("position", position);
+                startActivityForResult(in, editClassReqCode);
             }
         });
     }
@@ -73,12 +76,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode == newClassReqCode) {
-            if (resultCode == Activity.RESULT_OK) {
-                String val = data.getStringExtra("name");
-                classes.add(DataKt.newClass(val));
-                updateClassList();
-            }
+        switch (requestCode) {
+            case newClassReqCode:
+                if (resultCode == Activity.RESULT_OK) {
+                    String val = data.getStringExtra("name");
+                    classes.add(DataKt.newClass(val));
+                    updateClassList();
+                }
+                break;
+            case editClassReqCode:
+                if (resultCode == Activity.RESULT_OK) {
+                    int position = data.getIntExtra("position", -1);
+                    System.out.println("class: " + position);
+                    Class c = (Class)data.getSerializableExtra("class");
+                    if (position > 0) {
+                        classes.remove(position);
+                        System.out.println(c);
+                        classes.add(position, c);
+                        updateClassList();
+                    }
+                }
+                break;
         }
     }
 
