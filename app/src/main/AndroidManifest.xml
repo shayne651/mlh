@@ -22,6 +22,7 @@
             android:label="@string/title_activity_add_class"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".grade_item"></activity>
+        <activity android:name=".Categories"></activity>
     </application>
 
 </manifest>

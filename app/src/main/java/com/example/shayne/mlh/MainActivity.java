@@ -8,21 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-                        implements AdapterView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity {
 
     private GradeArrayAdapter contact;
     private ListView gradeL;
     private ArrayList<Class> classes;
     private String saveLocation = "classes.dat";
+    private final int newClassReqCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         gradeL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> l, View v, final int position, long id) {
-                Intent in = new Intent(getBaseContext(), Course.class);
+                Intent in = new Intent(getBaseContext(), Categories.class);
                 startActivity(in);
             }
         });
@@ -69,25 +67,20 @@ public class MainActivity extends AppCompatActivity
 
     public void newCourse(View view){
         Intent intent = new Intent(MainActivity.this, AddClass.class);
-        startActivityForResult(intent,1);
+        startActivityForResult(intent,newClassReqCode);
     }
 
     @Override
     public void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-            if(resultCode == Activity.RESULT_OK){
+        if (requestCode == newClassReqCode) {
+            if (resultCode == Activity.RESULT_OK) {
                 String val = data.getStringExtra("name");
                 classes.add(DataKt.newClass(val));
                 updateClassList();
             }
+        }
     }
-
-
-    @Override
-    public void onItemClick(AdapterView aView, View source, int position, long id){
-        //Intent in = new Intent(R.layout.)
-    }
-
 
     @Override
     public void onPause() {
