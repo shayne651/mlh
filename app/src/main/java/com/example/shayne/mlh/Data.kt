@@ -1,5 +1,6 @@
 package com.example.shayne.mlh
 
+import android.view.ViewDebug
 import java.io.Serializable
 import kotlin.collections.ArrayList
 
@@ -7,23 +8,26 @@ import kotlin.collections.ArrayList
  * Created by andrei on 12/2/17.
  */
 data class Grade(var name: String, var weight: Float,
-                 internal var totalComponents: Int, internal var drop_lowest: Int = 0,
+                 var totalComponents: Int, var drop_lowest: Int = 0,
                  private var _components: Array<Float>, var mark: Float = 0f,
                  var totalMark: Float = 0f) : Serializable {
     var components: Array<Float>
-        get() = _components
-        set(components) {
-            val size = components.size
-            val validMarks = components.sortedArray().sliceArray(drop_lowest until size)
-            val sum = validMarks.sum()
-            if (totalComponents < size)
-                totalComponents = size
+    set(components) {
+        val size = components.size
+        val validMarks = components.sortedArray().sliceArray(drop_lowest until size)
+        println(validMarks)
+        val sum = validMarks.sum()
+        if (totalComponents < size)
+            this.totalComponents = size
 
-            mark = sum / size
-            totalMark = sum / totalComponents
+        this.mark = sum / size
+        this.totalMark = sum / totalComponents
+        this._components = components
+    }
+    get (): Array<Float> {
+        return _components
+    }
 
-            _components = components
-        }
 }
 
 data class Class(var name: String,
@@ -62,6 +66,7 @@ fun newGrade(name: String, weight: Float, components: Array<Float>,
     return Grade(name, weight, count, _components = components, mark = mark,
             totalMark = totalMark, drop_lowest = drop_lowest)
 }
+
 
 
 fun newClass(name: String): Class {

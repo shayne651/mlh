@@ -25,7 +25,6 @@ class Categories : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
         curClass = intent.extras.getSerializable("class") as Class
-        println(curClass)
         listView = findViewById(R.id.Category_list) as ListView
         gradeArrayAdapter = GradeArrayAdapter(applicationContext,curClass.assignments)
         listView.adapter = gradeArrayAdapter;
@@ -39,18 +38,13 @@ class Categories : AppCompatActivity() {
         }
     }
 
-    fun updateGradeList() {
-        gradeArrayAdapter = GradeArrayAdapter(applicationContext,curClass.assignments)
-        listView.adapter = gradeArrayAdapter;
-    }
-
     fun openNew(v:View) {
         val newCat = Intent(this, new_category::class.java)
         startActivityForResult(newCat, newCatReqCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (resultCode){
+        when (requestCode){
             newCatReqCode -> run {
                 if (resultCode == Activity.RESULT_OK) {
                     val name = data!!.getStringExtra("category_name")
@@ -62,7 +56,8 @@ class Categories : AppCompatActivity() {
             editGradeReqCode -> run {
                 if (resultCode == Activity.RESULT_OK) {
                     val grade = data!!.getSerializableExtra("grade") as Grade
-                    val pos = data!!.getIntExtra("pos", -1)
+                    val pos = data!!.getIntExtra("position", -1)
+                    println(pos)
                     if (pos >= 0) {
                         curClass.assignments[pos] = grade
                     }
