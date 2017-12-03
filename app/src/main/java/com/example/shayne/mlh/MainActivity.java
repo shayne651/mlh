@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -41,6 +42,24 @@ public class MainActivity extends AppCompatActivity
         }
 
         updateClassList();
+
+        gradeL.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> l, View v, final int position, long id) {
+                Class c = (Class) l.getItemAtPosition(position);
+                classes.remove(c);
+                updateClassList();
+                return true;
+            }
+        });
+
+        gradeL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> l, View v, final int position, long id) {
+                Intent in = new Intent(getBaseContext(), Course.class);
+                startActivity(in);
+            }
+        });
     }
 
     private void updateClassList(){
@@ -63,14 +82,15 @@ public class MainActivity extends AppCompatActivity
             }
     }
 
+
     @Override
     public void onItemClick(AdapterView aView, View source, int position, long id){
         //Intent in = new Intent(R.layout.)
     }
 
+
     @Override
     public void onPause() {
-        System.out.println("paused");
         try {
             OutputStream outputStream = openFileOutput(saveLocation, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(outputStream);
